@@ -21,12 +21,20 @@ def handle_conversation ():
     subject = input("You: ")
     print("Great! Let's assess your skill level in ", subject)
     levels =["beginner", "intermediate", "advanced"]
+    score = 0
     if not subject == "exit":
         for level in levels:
             question = chain.invoke({"context":context, "question": f"Give a {level} level question for " + subject})
             print ("Bot:", question)
+            answer_recieved = input("Your answer: ")
+            answer = chain.invoke({"context":context, "question": "Is this the answer: " + answer_recieved + " (Answer y for yes and n for no)"})
+            print (answer)
 
-            context += f"Bot: {question}"
+            if answer == 'Y' or answer == 'y':
+                score +=1
+        print (score)
+
+    print (context)
 
 
 
