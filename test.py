@@ -16,10 +16,16 @@ prompt = ChatPromptTemplate.from_template(template)
 chain = prompt | model
 
 def handle_conversation ():
-    context = ""
     print ("Welcome to TutorGPT Type exit to quit. What do you wish to learn today?")
     subject = input("You: ")
     print("Great! Let's assess your skill level in ", subject)
+    level = asses_skill(subject)
+    
+
+
+
+def asses_skill (subject):
+    context = ""
     levels =["beginner", "intermediate", "advanced"]
     score = 0
     if not subject == "exit":
@@ -33,8 +39,8 @@ def handle_conversation ():
             if answer == 'Y' or answer == 'y':
                 score +=1
         print (score)
-
-    print (context)
+    
+    return levels[score-1]
 
 
 
